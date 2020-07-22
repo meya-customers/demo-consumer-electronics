@@ -1,6 +1,6 @@
-![Meya build](https://github.com/meya-ai/grid-template-hello-world/workflows/Meya%20build/badge.svg)
+![Meya build](https://github.com/meya-ai/demo-consumer-electronics/workflows/Meya%20build/badge.svg)
 
-# hello-world
+# demo-consumer-electronics
 
 Basic template BFML and Python code that runs on Meya.
 
