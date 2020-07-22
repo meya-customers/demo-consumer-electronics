@@ -1,0 +1,24 @@
+triggers:
+  - keyword: learn
+
+steps:
+  - ask: What do you want to know about?
+    tiles:
+      - title: Button functions
+        buttons:
+          - text: Diagram
+            url: http://example.org/button
+      - title: Bluetooth capabilities
+        buttons:
+          - text: Features
+            url: http://example.org/bluetooth/features
+          - text: Instruction video
+            url: http://example.org/bluetooth/video
+      - title: Latest firmware changes
+        buttons:
+          - text: Version 2.3
+            url: http://example.org/changes/2.3
+          - text: Version 2.2
+            url: http://example.org/changes/2.1
+          - text: Version 2.1
+            url: http://example.org/changes/2.2

@@ -1,7 +1,7 @@
 triggers:
   - type: chat_open
     when: (@ not thread.started )
-  - keyword: start over
+  - keyword: start
 
 steps:
   - thread_set:
@@ -12,4 +12,6 @@ steps:
         action:
           flow: flow.problem
       - text: I want to learn about my device
+        action:
+          flow: flow.learn
       - text: I'd like to refer a friend
