@@ -1,0 +1,29 @@
+triggers:
+  - keyword: problem
+
+steps:
+  - (problem_type)
+  - ask: OK, what kind of a problem are you experiencing?
+    buttons:
+      - text: Doesn't turn on
+        result: Power problem
+      - text: Volume is too low
+        result: Sound problem
+      - text: Doesn't connect via Bluetooth
+        result: Bluetooth problem
+      - text: Other
+        result:
+  - if: (@ not flow.result )
+    then: next
+    else:
+      jump: create_ticket
+  - ask: How would you describe the problem?
+
+  - (create_ticket)
+  - say: Please wait while I create a ticket...
+  - type: meya.zendesk.support.component.ticket.create
+    integration: integration.zendesk_support
+    subject: (@ flow.result )
+  - say: Ticket (@ flow.result.id ) created
+  - delay: 1
+  - say: An agent will be here to help shortly...

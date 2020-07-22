@@ -1,0 +1,15 @@
+triggers:
+  - type: chat_open
+    when: (@ not thread.started )
+  - keyword: start over
+
+steps:
+  - thread_set:
+      started: true
+  - ask: Hi, what would you like help with?
+    buttons:
+      - text: I have a problem with my device
+        action:
+          flow: flow.problem
+      - text: I want to learn about my device
+      - text: I'd like to refer a friend
