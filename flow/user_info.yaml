@@ -1,0 +1,9 @@
+steps:
+  - ask: What's your name?
+  - user_set: name
+
+  - ask: What's your email?
+    expect: email_address
+    error_message: Not a valid email address, please try again.
+    retries: 3
+  - user_set: email

@@ -5,25 +5,57 @@ steps:
   - (problem_type)
   - ask: OK, what kind of a problem are you experiencing?
     buttons:
-      - text: Doesn't turn on
-        result: Power problem
+      - text: Battery dies to quickly
+        action:
+          jump: create_ticket
+          data:
+            subject: Battery problem
       - text: Volume is too low
-        result: Sound problem
+        action:
+          jump: create_ticket
+          data:
+            subject: Sound problem
       - text: Doesn't connect via Bluetooth
-        result: Bluetooth problem
+        action:
+          jump: bluetooth
       - text: Other
-        result:
-  - if: (@ not flow.result )
-    then: next
-    else:
+        action:
+          jump: other
+
+  - (bluetooth)
+  - flow: flow.bluetooth
+  - if: (@ flow.result )
+    then:
       jump: create_ticket
+      data:
+        subject: Bluetooth problem
+    else: next
+  - ask: Great, do you want to start over?
+    buttons:
+      - text: Start
+        action:
+          flow: flow.start
+          transfer: true
+
+  - (other)
   - ask: How would you describe the problem?
+  - flow_set: subject
 
   - (create_ticket)
+  - if: (@ not user.name or not user.email )
+    then:
+      flow: flow.user_info
+    else: next
   - say: Please wait while I create a ticket...
+
+  - type: meya.zendesk.support.component.user.create_or_update
+    integration: integration.zendesk_support
+    name: (@ user.name )
+    email: (@ user.email )
+
   - type: meya.zendesk.support.component.ticket.create
     integration: integration.zendesk_support
-    subject: (@ flow.result )
+    subject: (@ flow.subject )
   - say: Ticket (@ flow.result.id ) created
   - delay: 1
   - say: An agent will be here to help shortly...

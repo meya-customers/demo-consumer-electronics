@@ -1,0 +1,4 @@
+type: meya.zendesk.sunshine_conversations.integration
+app_id: (@ vault.zendesk.sunshine_conversations.app_id )
+key_id: (@ vault.zendesk.sunshine_conversations.api_key_id )
+secret: (@ vault.zendesk.sunshine_conversations.api_secret )

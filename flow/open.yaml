@@ -1,0 +1,23 @@
+triggers:
+  - keyword: open
+
+steps:
+  - say: Welcome back, let me check your previous tickets.
+  - type: meya.zendesk.support.component.user.show
+    integration: integration.zendesk_support
+  - type: meya.zendesk.support.component.ticket.search
+    integration: integration.zendesk_support
+    query:
+      - requester_id:(@ flow.result.id )
+  - type: component.build_ticket_tiles
+    tickets: (@ flow.result )
+  - ask: Here are your tickets.
+    tiles: (@ flow.result )
+
+  - delay: 2
+  - ask: Ready to start now?
+    buttons:
+      - text: Start
+        action:
+          flow: flow.start
+          transfer: true

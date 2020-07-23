@@ -1,3 +1,6 @@
+zendesk.sunshine_conversations.app_id: xxx
+zendesk.sunshine_conversations.api_key_id: xxx
+zendesk.sunshine_conversations.api_secret: xxx
 zendesk.support.subdomain: zendesk_subdomain
 zendesk.support.bot_agent_email: username@domain.com
 zendesk.support.bot_agent_api_token: xxx

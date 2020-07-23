@@ -8,7 +8,15 @@ steps:
     then: next
     else:
       jump: check_assignee
-  - status: Ticket (@ flow.ticket.id) is now (@ flow.ticket.status )
+  - say: Ticket (@ flow.ticket.id) is now (@ flow.ticket.status )
+  - if: (@ flow.ticket.status == "solved")
+    then: next
+    else:
+      jump: check_assignee
+
+  - track: ticket_solved
+    data:
+      ticket_id: (@ flow.ticket.id )
 
   - (check_assignee)
   - if: (@ flow.ticket.assignee_id != flow.old_ticket.assignee_id )
@@ -21,10 +29,10 @@ steps:
   - type: meya.zendesk.support.component.user.show
     integration: integration.zendesk_support
     user_id: (@ flow.ticket.assignee_id )
-  - status: >
+  - say: >
       Ticket (@ flow.ticket.id) is now assigned to
       (@ flow.result.alias or flow.result.name )
   - end
 
   - (no_assignee)
-  - status: Ticket (@ flow.ticket.id) status is now unassigned
+  - say: Ticket (@ flow.ticket.id) status is now unassigned

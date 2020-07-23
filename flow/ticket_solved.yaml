@@ -1,0 +1,45 @@
+triggers:
+  - event_type: meya.analytics.event.track
+    when: (@ event.data.get("event") == "ticket_solved" )
+
+steps:
+  - flow_set:
+      ticket_id: (@ flow.event.data.data.ticket_id )
+  - ask: Did this solve your problem?
+    buttons:
+      - text: Yes
+        action:
+          jump: yes
+      - text: No
+        action:
+          jump: no
+
+  - (yes)
+  - type: meya.zendesk.support.component.ticket.update
+    integration: integration.zendesk_support
+    ticket_id: (@ flow.ticket_id )
+    comment: Solved the user's problem.
+    comment_public: false
+    tags:
+      - user_solved
+  - ask: Great, do you want to start over?
+    buttons:
+      - text: Start
+        action:
+          flow: flow.start
+          transfer: true
+
+  - (no)
+  - type: meya.zendesk.support.component.ticket.update
+    integration: integration.zendesk_support
+    ticket_id: (@ flow.ticket_id )
+    comment: Did not solve the user's problem.
+    comment_public: false
+    tags:
+      - user_not_solved
+  - ask: Sorry about that, do you want to start over?
+    buttons:
+      - text: Start
+        action:
+          flow: flow.start
+          transfer: true
