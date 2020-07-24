@@ -1,5 +1,5 @@
 triggers:
-  - type: chat_open
+  - type: page_open
     when: (@ not thread.started )
   - keyword: start
 
