@@ -18,9 +18,9 @@ steps:
         description: Here are a couple of links to help you troubleshoot.
         buttons:
           - text: Connectivity and Pairing
-            url: https://support.whoop.com/hc/en-us/articles/360038028313-WHOOP-Strap-3-0-iOS-Connectivity-and-Pairing
+            url: https://example.org
           - text: Heart Rate Broadcast
-            url: https://support.whoop.com/hc/en-us/articles/360023430193-How-do-I-connect-WHOOP-Strap-3-0-to-another-device-using-Heart-Rate-Broadcast-
+            url: https://example.org
   - jump: confirm
 
   - (android)
@@ -29,9 +29,9 @@ steps:
         description: Here are a couple of links to help you troubleshoot.
         buttons:
           - text: Connectivity and Pairing
-            url: https://support.whoop.com/hc/en-us/articles/360025115374-WHOOP-Strap-3-0-Android-Connectivity-and-Pairing
+            url: https://example.org
           - text: Frequent Android Disconnects
-            url: https://support.whoop.com/hc/en-us/articles/360037136333-Frequent-Android-Disconnects
+            url: https://example.org
 
   - (confirm)
   - delay: 5
